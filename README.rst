@@ -30,76 +30,62 @@ PyMAPDL Reader - Legacy Binary and Archive File Reader
    :target: https://results.pre-commit.ci/latest/github/pyansys/pymapdl-reader/main
    :alt: pre-commit.ci status
 
-This is the legacy module for reading in binary and ASCII files
-generated from MAPDL.
+这是一个传统模块，用于读取由 MAPDL 生成的二进制和 ASCII 文件。
 
-This Python module allows you to extract data directly from binary
-ANSYS v14.5+ files and to display or animate them rapidly using a
-straightforward API coupled with C libraries based on header files
-provided by ANSYS.
+通过该 Python 模块，您可以直接从 ANSYS v14.5+ 二进制文件中提取数据，并使用直接的 API 和基于 ANSYS 提供的头文件的 C 库快速显示或制作动画。
 
 The ``ansys-mapdl-reader`` module supports the following formats:
 
-- ``*.rst`` - Structural analysis result file
-- ``*.rth`` - Thermal analysis result file 
-- ``*.emat`` - Element matrix data file
-- ``*.full`` - Full stiffness-mass matrix file
-- ``*.cdb`` or ``*.dat`` - MAPDL ASCII block archive and
-  Mechanical Workbench input files
+- ``*.rst`` - Structural analysis result file 结构分析结果文件
+- ``*.rth`` - Thermal analysis result file  热分析结果文件
+- ``*.emat`` - Element matrix data file 单元矩阵数据文件
+- ``*.full`` - Full stiffness-mass matrix file 全刚度-质量矩阵文件
+- ``*.cdb`` or ``*.dat`` - MAPDL ASCII block archive and Mechanical Workbench input files MAPDL ASCII 块存档和 Mechanical Workbench 输入文件
 
-Please see the `PyMAPDL-Reader Documentation
-<https://readerdocs.pyansys.com>`_ for the full documentation.
+请参阅 `PyMAPDL-Reader 文档 <https://readerdocs.pyansys.com>`_ 获取完整文档。
 
 .. note::
 
-   This module may be depreciated in the future.
+   该模块将来可能会被舍弃。
 
-   You are encouraged to use the new Data Processing Framework (DPF)
-   modules at `PyDPF-Core <https://github.com/pyansys/pydpf-core>`_ and
-   `PyDPF-Post <https://github.com/pyansys/pydpf-post>`_ as they provide a
-   modern interface to Ansys result files using a client/server
-   interface using the same software used within Ansys Mechanical, but
-   via a Python client.
+   我们鼓励您在 `PyDPF-Core <https://github.com/pyansys/pydpf-core>`_ 和 `PyDPF-Post <https://github.com/pyansys/pydpf-post>`_ 中使用
+   新的数据处理框架 (DPF) 模块，因为它们提供了使用客户端/服务器界面访问 Ansys 结果文件的现代界面，该界面使用在 Ansys Mechanical 中使用的相同软件，但通过 Python 客户端。
 
 .. note::
 
-   Result file compatibility will be greatly improved by disabling result file
-   compression by setting ``/FCOMP,RST,0``.
+   通过设置 ``/FCOMP,RST,0`` ，禁用结果文件压缩，将大大提高结果文件的兼容性。
 
-   DPF does not have this restriction.
+   DPF 没有这种限制。
 
 
-Installation
+安装
 ------------
-Installation through pip::
+通过 pip 进行安装：：
 
    pip install ansys-mapdl-reader
 
-You can also visit `pymapdl-reader <https://github.com/pyansys/pymapdl-reader>`_
-to download the source or releases from GitHub.
+你也可以访问 `pymapdl-reader <https://github.com/pyansys/pymapdl-reader>`_ 从 GitHub 下载源代码或发布版本。
 
 
-Examples
+示例
 --------
 
-Loading and Plotting a MAPDL Archive File
+加载和绘制 MAPDL 存档文件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-ANSYS archive files containing solid elements (both legacy and
-modern), can be loaded using Archive and then converted to a vtk
-object.
+包含实体单元（传统和现代）的 ANSYS 归档文件可使用归档文件加载，然后转换为 vtk 对象。
 
 .. code:: python
 
     from ansys.mapdl import reader as pymapdl_reader
     from ansys.mapdl.reader import examples
     
-    # Sample *.cdb
+    # Sample *.cdb 
     filename = examples.hexarchivefile
     
-    # Read ansys archive file
+    # Read ansys archive file 读取 ansys 存档文件
     archive = pymapdl_reader.Archive(filename)
     
-    # Print raw data from cdb
+    # Print raw data from cdb 从 cdb 打印原始数据
     for key in archive.raw:
        print("%s : %s" % (key, archive.raw[key]))
     
@@ -117,11 +103,11 @@ object.
 .. figure:: https://github.com/pyansys/pymapdl-reader/blob/main/doc/source/images/hexbeam_small.png
    :alt: Hexahedral beam
 
-You can then load this vtk file using ``pyvista`` or another program that uses VTK.
+然后，您可以使用 ``pyvista`` 或其他使用 VTK 的程序加载该 vtk 文件。
     
 .. code:: python
 
-    # Load this from vtk
+    # 从 vtk 中加载
     import pyvista as pv
     grid = pv.UnstructuredGrid('hex.vtu')
     grid.plot()
