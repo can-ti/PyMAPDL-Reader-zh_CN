@@ -24,7 +24,7 @@ if not os.path.exists(pyvista.FIGURE_PATH):
 pyvista.BUILDING_GALLERY = True
 
 
-# suppress annoying matplotlib bug
+# suppress annoying matplotlib bug 消除恼人的 matplotlib bug
 warnings.filterwarnings(
     "ignore",
     category=UserWarning,
@@ -71,7 +71,7 @@ templates_path = ["_templates"]
 # The suffix(es) of source filenames.
 source_suffix = ".rst"
 
-# The master toctree document.
+# The master toctree document. 主 toctree 文件。
 master_doc = "index"
 
 # General information about the project.
