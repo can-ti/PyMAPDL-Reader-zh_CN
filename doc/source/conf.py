@@ -51,6 +51,7 @@ extensions = [
     "sphinx_gallery.gen_gallery",
     "sphinx.ext.extlinks",
     "sphinx.ext.coverage",
+    "sphinx.ext.githubpages", # 这个插件会为生成后的文档添加 .nojekyll 文件， 也会为 GitHub Pages 自定义域名添加 CNAME 文件。 如果没有 .nojekyll， GitHub Pages 会认为 _ 开头的文件夹是 jekyll 内部文件夹， 然后将它过滤掉。
 ]
 
 # Intersphinx mapping
